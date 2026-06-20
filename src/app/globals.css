@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #05070e;
+  --accent: #2e8bff;
+  --accent-cyan: #2bd4ff;
+  --font-inter: "Inter", system-ui, -apple-system, sans-serif;
+  --font-space: "Space Grotesk", var(--font-inter);
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* offset for sticky navbar when jumping to anchors */
+  scroll-padding-top: 96px;
+}
+
+body {
+  background-color: var(--bg);
+  color: #e6edf8;
+  overflow-x: hidden;
+}
+
+/* Ambient page background: layered radial glows + faint grid */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60rem 60rem at 15% -10%, rgba(46, 139, 255, 0.16), transparent 60%),
+    radial-gradient(50rem 50rem at 100% 10%, rgba(43, 212, 255, 0.1), transparent 55%),
+    radial-gradient(40rem 40rem at 50% 120%, rgba(46, 139, 255, 0.1), transparent 60%);
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, black 30%, transparent 80%);
+  pointer-events: none;
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .glass-strong {
+    background: linear-gradient(
+      135deg,
+      rgba(17, 23, 38, 0.9) 0%,
+      rgba(8, 11, 20, 0.92) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(120deg, #e6edf8 0%, #6bb0ff 60%, #2bd4ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .accent-gradient {
+    background: linear-gradient(135deg, #2e8bff 0%, #2bd4ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #4ddcff;
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(46, 139, 255, 0.5),
+      transparent
+    );
+  }
+}
+
+/* Focus visibility for keyboard users */
+:focus-visible {
+  outline: 2px solid #2bd4ff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05070e;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#1c6fe6, #11172690);
+  border-radius: 999px;
+  border: 2px solid #05070e;
+}
+
+::selection {
+  background: rgba(46, 139, 255, 0.35);
+  color: #fff;
+}
+
+/* Respect reduced motion across the board */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
