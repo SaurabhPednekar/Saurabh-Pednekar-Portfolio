@@ -109,10 +109,15 @@ export function ArchitectureShowcase() {
     measure();
     const ro = new ResizeObserver(measure);
     if (containerRef.current) ro.observe(containerRef.current);
+    btnRefs.current.forEach((el) => el && ro.observe(el));
     window.addEventListener("resize", measure);
+    const raf = requestAnimationFrame(measure);
+    const settle = setTimeout(measure, 300);
     return () => {
       ro.disconnect();
       window.removeEventListener("resize", measure);
+      cancelAnimationFrame(raf);
+      clearTimeout(settle);
     };
   }, []);
 
@@ -203,12 +208,14 @@ export function ArchitectureShowcase() {
                   </span>
                 </motion.button>
 
-                {/* connectors (static lines) */}
-                {i < archNodes.length - 1 && (
+                {/* connectors (static lines); last card gets a spacer to keep equal width */}
+                {i < archNodes.length - 1 ? (
                   <>
                     <FlowConnector vertical />
                     <FlowConnector />
                   </>
+                ) : (
+                  <div aria-hidden className="hidden flex-1 lg:block" />
                 )}
               </div>
             );
