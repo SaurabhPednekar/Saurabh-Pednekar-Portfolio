@@ -82,12 +82,21 @@ export function About() {
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div>
           <div className="relative mb-7 w-max">
+            {/* Mobile: Saurabh 1 */}
+            <Image
+              src="/images/saurabh-1.jpg"
+              alt={profile.name}
+              width={180}
+              height={216}
+              className="h-[216px] w-[180px] rounded-2xl object-cover ring-1 ring-electric/25 lg:hidden"
+            />
+            {/* Desktop: Saurabh 2 */}
             <Image
               src="/images/saurabh-2.jpg"
               alt={profile.name}
               width={180}
               height={216}
-              className="h-[216px] w-[180px] rounded-2xl object-cover ring-1 ring-electric/25"
+              className="hidden h-[216px] w-[180px] rounded-2xl object-cover ring-1 ring-electric/25 lg:block"
             />
             <span className="absolute -right-3 -top-3 flex h-11 w-11 items-center justify-center rounded-xl glass text-cyan-400 ring-1 ring-electric/30">
               <Database size={18} />
