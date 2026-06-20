@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Download, Linkedin, Mail, ArrowDown } from "lucide-react";
 import { NetworkBackground } from "@/components/ui/NetworkBackground";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -29,7 +30,8 @@ export function Hero() {
       </motion.div>
 
       <div className="relative mx-auto w-full max-w-7xl px-4 pt-28 sm:px-6">
-        <motion.div variants={container} initial="hidden" animate="visible" className="max-w-3xl">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-14">
+        <motion.div variants={container} initial="hidden" animate="visible" className="max-w-3xl lg:flex-1">
           <motion.span
             variants={item}
             className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs"
@@ -82,6 +84,30 @@ export function Hero() {
             </MagneticButton>
           </motion.div>
         </motion.div>
+
+        {/* Headshot */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto hidden h-72 w-72 shrink-0 lg:block xl:h-80 xl:w-80"
+        >
+          <div className="absolute inset-0 rounded-full ring-1 ring-electric/40" />
+          <div className="absolute inset-3 overflow-hidden rounded-full bg-base-800 ring-1 ring-electric/25">
+            <Image
+              src="/images/saurabh-1.jpg"
+              alt={profile.name}
+              fill
+              sizes="(min-width: 1280px) 320px, 288px"
+              className="object-cover"
+              priority
+            />
+          </div>
+          <span className="absolute right-6 top-2 h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_2px_rgba(43,212,255,0.6)]" />
+          <span className="absolute -left-1 bottom-12 h-2 w-2 rounded-full bg-electric" />
+          <span className="absolute bottom-20 right-0 h-1.5 w-1.5 rounded-full bg-cyan-400" />
+        </motion.div>
+        </div>
       </div>
 
       {/* Scroll cue */}
